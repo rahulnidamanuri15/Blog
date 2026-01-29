@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block body %}
+<form method="post" action="" class="container w-50">
+  {{ form.hidden_tag() }}
+  
+  <fieldset class="container rounded" style="margin-top: 6rem; padding: 15px 25px 20px 25px; border: 1px solid grey;">
+    <div class="mb-3 border-bottom border-3">
+    <h5>Request Reset Password</h5>
+    
+    
+  </div>
+
+    <div style="margin-bottom: 1rem;">
+      {{form.email.label(class="form-control-label")}}
+      {% if form.email.errors %}
+      {{form.email(class="form-control is-invalid")}}
+      <div class="invalid-feedback">
+        {% for error in form.email.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{form.email(class="form-control ")}}
+      {% endif %}
+    </div>
+
+    <div style="margin-bottom: 1rem;">
+      {{form.submit(class="btn btn-outline-info")}}</div>
+  </fieldset>
+
+</form>
+
+{% endblock body %}

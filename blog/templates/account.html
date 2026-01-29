@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="card mb-3 p-2 container" style="max-width: 540px; margin-top: 5%;">   
+  <div class="d-inline-flex  flex-row p-2 ms-3 justify-content-cente" >
+    <div class="d-flex align-content-center flex-wrap">
+      <img src="{{p_image}}" class="img-fluid  " style="height: 80px; width: 80px; border-radius: 100%;">
+    </div>
+    
+      <div class="card-body align-content-start ">
+        <h5 class="card-title">{{current_user.username}}</h5>
+        <p class="card-text">{{current_user.email}}</p>
+      </div>
+  </div>
+  <form method="post"  action="" enctype="multipart/form-data">
+  {{ form.hidden_tag() }}
+  <fieldset class="container " >
+    <legend class="border-bottom mb-3">Account Info</legend>
+    
+    <div style="margin-bottom: 1rem;">
+      {{form.username.label(class="form-control-label")}}
+
+      {% if form.username.errors %}
+      {{form.username(class="form-control is-invalid")}}
+      <div class="invalid-feedback">
+        {% for error in form.username.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+
+      {% else %}
+      {{form.username(class="form-control ")}}
+      {% endif %}
+
+    </div>
+    <div style="margin-bottom: 1rem;">
+      {{form.email.label(class="form-control-label")}}
+      {% if form.email.errors %}
+      {{form.email(class="form-control is-invalid")}}
+      <div class="invalid-feedback">
+        {% for error in form.email.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{form.email(class="form-control ")}}
+      {% endif %}
+    </div>
+    <div style="margin-bottom: 1rem;">
+      {{form.p_image.label()}}
+      <div class="m-2">
+      {{form.p_image(class="form-control-file ")}}
+      {% if form.p_image.errors %}
+      <div class="m-1">
+      {% for error in form.p_image.errors %}
+          <span class="text-danger ">{{error}}</span>
+      {% endfor %}
+        </div>
+      {% endif %}
+      </div>
+    </div>
+    <div style="margin-bottom: 1rem; margin-left: 1rex;">
+        {{form.update(class="btn btn-outline-info")}}</div>
+
+  </fieldset>
+
+</form>
+
+</div>
+{% endblock body %}

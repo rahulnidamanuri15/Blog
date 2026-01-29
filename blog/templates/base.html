@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/static/main.css">
+</head>
+<nav class="navbar navbar-expand-lg  fixed-top" style="background-color: rgb(0, 90, 142);">
+  <div class="container-fluid" style="margin-left: 10rem;">
+    <a class="navbar-brand text-white " href="/">Blog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{url_for('main.home')}}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{url_for('main.about')}}">About</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 " style="margin-left: 40vw;">
+
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="{{url_for('posts.new_post')}}">New Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="{{url_for('users.account')}}">account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="{{url_for('users.logout')}}">Logout</a>
+        </li>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="{{url_for('users.login')}}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="{{url_for('users.register')}}">Register</a>
+        </li>
+
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<body class="">
+  <div aria-live="polite" aria-atomic="true" class="position-relative">
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="toast align-items-center text-bg-{{ category }} border-0  show  " role="alert" >
+        <div class="d-flex">
+          <div class="toast-body ">
+            {{ message }}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+    </div>
+  </div>
+
+  {% block body %}
+
+  {% endblock body %}
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(el => new bootstrap.Popover(el))
+    const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', () => {
+      myInput.focus()
+    })
+
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    var toastList = toastElList.map(function (toastEl) {
+      return new bootstrap.Toast(toastEl, option)
+    })
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block body %}
+<form method="post" action="" class="container w-50 ">
+  {{ form.hidden_tag() }}
+  
+  <fieldset class="container rounded" style="margin-top: 6rem; padding: 15px 25px 20px 25px; border: 1px solid grey;">
+    <div class="mb-3 border-bottom border-3">
+    <h5>{{legend}}</h5>
+    
+  </div>
+
+    <div style="margin-bottom: 1rem;">
+      {{form.title.label(class="form-control-label")}}
+      {% if form.title.errors %}
+      {{form.title(class="form-control is-invalid")}}
+      <div class="invalid-feedback">
+        {% for error in form.title.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{form.title(class="form-control ")}}
+      {% endif %}
+    </div>
+    <div style="margin-bottom: 1rem;">
+      {{form.content.label(class="form-control-label")}}
+      {% if form.content.errors %}
+      {{form.content(class="form-control is-invalid")}}
+      <div class="invalid-feedback">
+        {% for error in form.content.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+        {% else %}
+        {{form.content(class="form-control ")}}
+        {% endif %}
+      </div>
+    </div>
+    
+    <div style="margin-bottom: 1rem;">
+      {{form.post(class="btn btn-outline-info")}}</div>
+  </fieldset>
+
+</form>
+
+{% endblock body %}

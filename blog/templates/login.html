@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block body %}
+<form method="post" action="" class="container w-50">
+  {{ form.hidden_tag() }}
+  
+  <fieldset class="container rounded" style="margin-top: 6rem; padding: 18px 25px 20px 25px; border: 1px solid grey;">
+    <div class="mb-3 border-bottom border-3">
+    <h5>Log In</h5>
+    
+    
+  </div>
+
+    <div style="margin-bottom: 1rem;">
+      {{form.email.label(class="form-control-label")}}
+      {% if form.email.errors %}
+      {{form.email(class="form-control is-invalid")}}
+      <div class="invalid-feedback">
+        {% for error in form.email.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{form.email(class="form-control ")}}
+      {% endif %}
+    </div>
+    <div style="margin-bottom: 1rem;">
+      {{form.password.label(class="form-control-label")}}
+      {% if form.password.errors %}
+      {{form.password(class="form-control is-invalid")}}
+      <div class="invalid-feedback">
+        {% for error in form.password.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+        {% else %}
+        {{form.password(class="form-control ")}}
+        {% endif %}
+      </div>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+      <label class="form-check-label" for="checkDefault">
+        Remember Me
+      </label>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      {{form.submit(class="btn btn-outline-info")}}
+      
+    </div>
+    <div">
+     <a href="{{url_for('users.request_reset')}}" style="text-decoration: none;">Forgot Password?</a>
+      
+    </div>
+  </fieldset>
+
+  <div class="mt-3">
+    <span>Need an account ?</span>  <a href="{{url_for('users.register')}}" style="text-decoration: none;">Sign up now</a>
+  </div>
+
+</form>
+
+{% endblock body %}
