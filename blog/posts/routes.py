@@ -29,10 +29,7 @@ def view_post(id):
 
 @posts.route("/post/<int:id>/update",methods=["POST","GET"])
 def update_post(id):
-   if current_user.is_authenticated:
-       show=True
-   else:
-       show=False
+   
 
    post=Post.query.get_or_404(id)
    if post.author != current_user:
@@ -49,7 +46,7 @@ def update_post(id):
         form.title.data=post.title
         form.content.data=post.content
 
-   return render_template("create_post.html",form=form,legend="Update Post",show=show)
+   return render_template("create_post.html",form=form,legend="Update Post")
  
 
 
